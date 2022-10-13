@@ -1,2 +1,3 @@
-# Lab1_computationalIntelligence
-First Lab Computational Intelligence 
+# Computational Intelligence
+In this repository will add the labs that will be completed during the course
+
