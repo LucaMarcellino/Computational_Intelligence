@@ -1,6 +1,7 @@
 # Lab1
-In this repository is present a possibile solution for the set covering problem. I worked with my collegue Luca Villani in ordeto to find a best solution.
-The code print the number of step and states that the solution cover. 
+In this repository is present a possibile solution for the set covering problem. I worked with my collegue Luca Villani (304992) in order to to find a best solution.
+The code print the sum of number of elements inside the lists (W). In the code the unit_cost is setted to the len of the list that the code will add, but in this case the computation time will increase exponentially when also the N increase. When we try to explore N=100 we can't find a good solution in a reasonable time.
+If we change the unit_cost to one we obtain the results here below. The results are not optiamal but the time to achive them is very good. we thought that this could be an optimal trade-off between (difference between optimal solution and found solution) and (computational time).
 
 
 Problem with N=5
