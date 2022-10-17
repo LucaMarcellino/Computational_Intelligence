@@ -67,7 +67,7 @@ def result(state, a):
     state.append(a)
     return State(np.array(state,dtype=object))
 
-def h(state):
+def h(state):  
     goal=set()
     for list_ in state._data:
         goal.update(list_)
@@ -146,4 +146,4 @@ for N in [5,10,20,100,500,1000]:
         )
     end = time.time()
 
-    print(f"Done in {end-start} seconds\n\n")
+    print(f"Done in {end-start} seconds\n")
