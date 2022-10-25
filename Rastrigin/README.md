@@ -3,7 +3,7 @@
 
 Until now we (me and Luca Villani ) we implemented only a brutal solution for the sphere problem. 
 
-We decide to start with an exploration saving the best coordinates we found and after we stated to the latter to make some explotation. 
+We decide to start with an exploration saving the best coordinates we found and after we stated to the latter to make some exploitation. 
 
 We found that in this way we can achive this solution.
 
