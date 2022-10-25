@@ -10,18 +10,18 @@ logging.basicConfig(
     datefmt="%H:%M:%S",
     level=logging.INFO,
 )
-def Sphere(x, A=10):
+def rastrigin(x, A=10):
     """NumPy Rastrigin test function"""
     return -np.sum(A - A * np.cos(2 * np.pi * x) + x**2, axis=0)
 N_POINTS = 200
 r = np.linspace(-5, 5, N_POINTS)
-"""
+
 def Sphere(x,A = 10):
     return -np.sum(x**2, axis=0)
-"""
+
 
 x = np.array(np.meshgrid(r, r))
-#z = rastrigin(x)
+z = rastrigin(x)
 z1 = Sphere(x)
 plt.figure(figsize=(10, 10))
 ax = plt.axes(projection="3d")
@@ -53,7 +53,7 @@ while time < 250:
 print(Sphere(top))
 
 time = 0 
-while time < 10000:
+while Sphere(top) <= 0.000009:
     checkCoord = False
     while checkCoord == False:
         xi = top[0] + random.uniform(-0.5,0.5)
