@@ -108,7 +108,7 @@ for N in tqdm(N):
             for i in combinations(repoducer, 2): #I used each of best 6 to reproduce and generate the new offsprings
                 parentA = i[0]
                 parentB = i[1]
-                if random.random() < .3: #Random mutation and random to chose which parent will be mutate
+                if random.random() < .35: #Random mutation and randomly which parent will be mutate
                     choose = random.choice([0,1])
                     if choose == 0:
                         (offSpring,flag) = mutation(parentA,initial_formulation,N)
@@ -118,22 +118,21 @@ for N in tqdm(N):
                         (offSpring,flag) = mutation(parentB,initial_formulation,N)
                         if flag == True:
                             offSprings.append(offSpring)
-                else:
-                    (offSpring,flag)  = crossOver(parentA,parentB,initial_formulation, N)
-                    if flag == True:
-                        offSprings.append(offSpring)
+                (offSpring,flag)  = crossOver(parentA,parentB,initial_formulation, N)
+                if flag == True:
+                    offSprings.append(offSpring)
             t+=1
 
             offSprings.sort(key = lambda l: l[0])
             population += offSprings[:3] #I append to the population only the best three solutions between the offsprings
             population.sort(key = lambda l : l[0])
             del population[len(population)-3:] #I delete the final three to not compute heavy sorting, pay attentio that is not obvious that we have such items 
-
         dictPrint["N"].append(N)
         dictPrint["Time"].append(tmax)
         dictPrint["Solution Found"].append(population[0][0])
 
-pd.DataFrame(dictPrint).to_csv("result_lab2.csv")
+
+#pd.DataFrame(dictPrint).to_csv("result_lab2.csv")
  
 
 
