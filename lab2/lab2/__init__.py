@@ -48,7 +48,7 @@ def createFitness(induvual):
     fitness = 0
     for list_ in induvual:
         fitness += len(list_)
-    return fitness 
+    return fitness
 #Crossover with two side so the offspring is created with the parentA's first part, parentB's between the two cut point and the last part parentA
 def crossOver(parentA,parentB,initial_formualtion, N):
     parentA, parentB = parentA[1], parentB[1]
@@ -75,9 +75,18 @@ def mutation(parent,initial_formulation,N):
     else:
         return (mut,False)
 
+#fuction to remove the duplicates from the population
+def removeDuplicates(population):
+    population1 = [(",".join(map(str,map(int,x[1].tolist()))),x[0]) for x in population]
+    dict_ = dict(population1)
+    list_ = list()
+    for k,v in dict_.items():
+        list_.append((v,np.fromstring(k,sep=",")))
+    return list_
+
 
 #Inital list of lists
-N = [5,10,20,100,500,1000]
+N = [5,10,20,100,1000]
 dictPrint = dict()
 dictPrint["N"] = []
 dictPrint["Time"] = []
@@ -103,12 +112,12 @@ for N in tqdm(N):
         population.sort(key = lambda l : l[0])
 
         while t <=  tmax:
-            repoducer = population[:6]  #choose the best six to reproduce
+            repoducer = [population[i] for i in range(7)]  #choose the best six to reproduce
             offSprings = list()
             for i in combinations(repoducer, 2): #I used each of best 6 to reproduce and generate the new offsprings
                 parentA = i[0]
                 parentB = i[1]
-                if random.random() < .35: #Random mutation and randomly which parent will be mutate
+                if random.random() < .45: #Random mutation and randomly which parent will be mutate
                     choose = random.choice([0,1])
                     if choose == 0:
                         (offSpring,flag) = mutation(parentA,initial_formulation,N)
@@ -121,18 +130,18 @@ for N in tqdm(N):
                 (offSpring,flag)  = crossOver(parentA,parentB,initial_formulation, N)
                 if flag == True:
                     offSprings.append(offSpring)
-            t+=1
-
             offSprings.sort(key = lambda l: l[0])
             population += offSprings[:3] #I append to the population only the best three solutions between the offsprings
             population.sort(key = lambda l : l[0])
-            del population[len(population)-3:] #I delete the final three to not compute heavy sorting, pay attentio that is not obvious that we have such items 
+            population = removeDuplicates(population)
+            if len(population) > 10:
+                del population[len(population)-3:] #I delete the final three to not compute heavy sorting, pay attentio that is not obvious that we have such items
+            t+=1 
         dictPrint["N"].append(N)
         dictPrint["Time"].append(tmax)
         dictPrint["Solution Found"].append(population[0][0])
 
-
-#pd.DataFrame(dictPrint).to_csv("result_lab2.csv")
+pd.DataFrame(dictPrint).to_csv("result_lab2_mutatation=0,45.csv")
  
 
 
