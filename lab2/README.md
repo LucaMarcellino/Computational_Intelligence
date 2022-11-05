@@ -52,7 +52,7 @@ The results are also present inside the lab2 folder in two different csv.
 
 We can notice that the value found not change if the steps increase and in extension we will talk about that.
 
-# Possible extension
+## Possible extension
 
 Like said before solutions don't change if we change the stopping condition, we can immagine that we are stacked in a local minima and that we found this in a 10_000 steps. A good think to implement could be change the population after 10_000 step and use that to find another minima and compere to our minima.
 
